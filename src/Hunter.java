@@ -24,6 +24,12 @@ public class Hunter {
         gold = startingGold;
     }
 
+    public Hunter(String hunterName) {
+        this.hunterName = hunterName;
+        kit = new String[]{"Water", "Rope", "Machete", "Horse", "Rope"};
+        gold = 100;
+    }
+
     //Accessors
     public String getHunterName() {
         return hunterName;
