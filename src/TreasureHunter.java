@@ -48,12 +48,17 @@ public class TreasureHunter {
         // set hunter instance variable
         hunter = new Hunter(name, 20);
 
-        System.out.print("Hard mode? (y/n): ");
-        String hard = SCANNER.nextLine().toLowerCase();
-        if (hard.equals("y")) {
+        System.out.print("Easy, Normal, or Hard Mode? (e/n/h) ");
+        String mode = SCANNER.nextLine().toLowerCase();
+        if (mode.equals("h")) {
             hardMode = true;
-        }else if (hard.equals("test")){
+        }else if (mode.equals("test")){
             hunter = new Hunter(name);
+        }else if (mode.equals("e")){
+            hunter = new Hunter(name, 40);
+            //brawls are easier
+            //selling item gets fll refund
+            //item can't break
         }
     }
 
