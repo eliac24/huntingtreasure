@@ -50,7 +50,11 @@ public class Hunter {
                     System.out.println("You already have this in your chest.");
                 }else{
                     if (addItemInChest(treasure)){
-                        System.out.println("It's added to your chest.");
+                        if (!chestIsEmpty()){
+                            System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                        }else{
+                            System.out.println("It's added to your chest.");
+                        }
                     }
                 }
             }else{
