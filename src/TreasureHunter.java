@@ -133,12 +133,9 @@ public class TreasureHunter {
             }
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
-
         }
         else if(choice.equals("d")){
             currentTown.digGold();
-        }
-        else if (choice.equals("x")) {
         } else if (choice.equals("h")){
             String treasure = currentTown.getTreasure();
             boolean searched = currentTown.getSearched();
