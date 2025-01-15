@@ -33,7 +33,7 @@ public class Hunter {
         gold = 100;
     }
 
-    //Accessors
+    //Accessor
     public String getHunterName() {
         return hunterName;
     }
