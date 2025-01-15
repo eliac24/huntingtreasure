@@ -10,7 +10,9 @@ public class Town {
     private Shop shop;
     private Terrain terrain;
     private String printMessage;
+    private String treasure;
     private boolean toughTown;
+    private boolean searched;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -26,9 +28,11 @@ public class Town {
         // gets called from a client class
         hunter = null;
         printMessage = "";
+        treasure = getNewTreasure();
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+        searched = false;
     }
 
     public Terrain getTerrain() {
@@ -38,6 +42,10 @@ public class Town {
     public String getLatestNews() {
         return printMessage;
     }
+
+    public String getTreasure(){ searched = true; return treasure; }
+
+    public boolean getSearched() { return searched; }
 
     /**
      * Assigns an object to the Hunter in town.
@@ -136,6 +144,19 @@ public class Town {
             return new Terrain("Jungle", "Machete");
         }else{
             return new Terrain("Marsh", "Boots");
+        }
+    }
+
+    private String getNewTreasure(){
+        double rnd = Math.random() * 4;
+        if (rnd < 1){
+            return "crown";
+        }else if (rnd < 2){
+            return "trophy";
+        }else if (rnd < 3){
+            return "gem";
+        }else{
+            return "dust";
         }
     }
 

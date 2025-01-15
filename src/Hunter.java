@@ -10,6 +10,7 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+    private String[] chest;
     private int gold;
 
     /**
@@ -20,13 +21,15 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[6]; // only 5 possible items can be stored in kit
+        kit = new String[6]; // only 6 possible items can be stored in kit
+        chest = new String[4];
         gold = startingGold;
     }
 
     public Hunter(String hunterName) {
         this.hunterName = hunterName;
         kit = new String[]{"water", "rope", "machete", "horse", "rope", "boots"};
+        chest = new String[3];
         gold = 100;
     }
 
@@ -35,6 +38,24 @@ public class Hunter {
         return hunterName;
     }
 
+    public void Search(String treasure, boolean searched){
+        if (treasure.equals("dust")) {
+            System.out.println("You found dust.\nIt's not added to your chest.");
+        }else{
+            if (!searched){
+                System.out.println("You found a " + treasure + "!");
+                if (hasItemInChest(treasure)){
+                    System.out.println("You already have this in your chest.");
+                }else{
+                    if (addItemInChest(treasure)){
+                        System.out.println("It's added to your chest.");
+                    }
+                }
+            }else{
+                System.out.println("You already searched this town.");
+            }
+        }
+    }
     /**
      * Updates the amount of gold the hunter has.
      *
@@ -110,6 +131,14 @@ public class Hunter {
         return false;
     }
 
+    private boolean addItemInChest(String item) {
+        if (!hasItemInChest(item)) {
+            int idx = emptyPositionInChest();
+            chest[idx] = item;
+            return true;
+        }
+        return false;
+    }
     /**
      * Checks if the kit Array has the specified item.
      *
@@ -120,6 +149,15 @@ public class Hunter {
         for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
                 // early return
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasItemInChest(String item) {
+        for (String tmpItem : chest) {
+            if (item.equals(tmpItem)) {
                 return true;
             }
         }
@@ -195,6 +233,15 @@ public class Hunter {
     private int emptyPositionInKit() {
         for (int i = 0; i < kit.length; i++) {
             if (kit[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int emptyPositionInChest() {
+        for (int i = 0; i < chest.length; i++) {
+            if (chest[i] == null) {
                 return i;
             }
         }
