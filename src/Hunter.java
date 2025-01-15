@@ -38,6 +38,8 @@ public class Hunter {
         return hunterName;
     }
 
+    public String[] getKit() { return kit; }
+
     public void Search(String treasure, boolean searched){
         if (treasure.equals("dust")) {
             System.out.println("You found dust.\nIt's not added to your chest.");
@@ -170,26 +172,32 @@ public class Hunter {
      *
      * @return The printable String representation of the inventory.
      */
-    public String getInventory() {
-        String printableKit = "";
+    public String getInventory(String[] list) {
+        String printableList = "";
         String space = " ";
 
 
-        for (String item : kit) {
+        for (String item : list) {
             if (item != null) {
-                printableKit +=  Colors.PURPLE+ item + Colors.RESET + space;
+                printableList +=  Colors.PURPLE+ item + Colors.RESET + space;
             }
         }
-        return printableKit;
+        return printableList;
     }
 
     /**
      * @return A string representation of the hunter.
      */
     public String infoString() {
-        String str = hunterName + " " + Colors.YELLOW + gold +Colors.RESET+ " gold";
+        String str = hunterName + " has " + Colors.YELLOW + gold +Colors.RESET+ " gold";
         if (!kitIsEmpty()) {
-            str += " and " + getInventory();
+            str += " and " + getInventory(kit);
+        }
+        str += "\nTreasure found: ";
+        if (!chestIsEmpty()){
+            str += " a " + getInventory(chest);
+        }else{
+            str += " none ";
         }
         return str;
     }
@@ -225,6 +233,14 @@ public class Hunter {
         return true;
     }
 
+    private boolean chestIsEmpty() {
+        for (String string : chest) {
+            if (string != null) {
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * Finds the first index where there is a null value.
      *
