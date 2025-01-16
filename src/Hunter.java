@@ -28,7 +28,7 @@ public class Hunter {
 
     public Hunter(String hunterName) {
         this.hunterName = hunterName;
-        kit = new String[]{"water", "rope", "machete", "horse", "rope", "boots"};
+        kit = new String[]{"water", "rope", "machete", "horse", "boat", "boots", "shovel"};
         chest = new String[3];
         gold = 100;
     }
@@ -40,18 +40,21 @@ public class Hunter {
 
     public String[] getKit() { return kit; }
 
-    public void Search(String treasure, boolean searched){
+    public boolean Search(String treasure, Town town){
         if (treasure.equals("dust")) {
             System.out.println("You found dust.\nIt's not added to your chest.");
+            return false;
         }else{
-            if (!searched){
+            if (!town.getSearched()){
                 System.out.println("You found a " + treasure + "!");
+                town.setSearched();
                 if (hasItemInChest(treasure)){
                     System.out.println("You already have this in your chest.");
                 }else{
                     if (addItemInChest(treasure)){
-                        if (!chestIsEmpty()){
+                        if (chestIsEmpty()){
                             System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                            return true;
                         }else{
                             System.out.println("It's added to your chest.");
                         }
@@ -61,6 +64,7 @@ public class Hunter {
                 System.out.println("You already searched this town.");
             }
         }
+        return false;
     }
     /**
      * Updates the amount of gold the hunter has.
@@ -210,7 +214,7 @@ public class Hunter {
     public String infoString() {
         String str = hunterName + " has " + Colors.YELLOW + gold +Colors.RESET+ " gold";
         if (!kitIsEmpty()) {
-            str += " and " + getInventory(kit);
+            str += "\nKit: " + getInventory(kit);
         }
         str += "\nTreasure found: ";
         if (!chestIsEmpty()){
