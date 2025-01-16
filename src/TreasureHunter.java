@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean samuraiMode;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -25,6 +26,7 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
+        samuraiMode = false;
     }
 
     /**
@@ -52,13 +54,17 @@ public class TreasureHunter {
         String mode = SCANNER.nextLine().toLowerCase();
         if (mode.equals("h")) {
             hardMode = true;
-        }else if (mode.equals("test")){
+        }else if (mode.equals("test")) {
             hunter = new Hunter(name);
-        }else if (mode.equals("e")){
+        }
+        else if (mode.equals("e")){
             hunter = new Hunter(name, 40);
             //brawls are easier
             //selling item gets fll refund
             //item can't break
+        }
+        else if(mode.equals("s")){
+            samuraiMode = true;
         }
     }
 

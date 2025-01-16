@@ -21,7 +21,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[6]; // only 6 possible items can be stored in kit
+        kit = new String[8]; // only 8 possible items can be stored in kit
         chest = new String[3];
         gold = startingGold;
     }
@@ -74,6 +74,19 @@ public class Hunter {
         }
     }
 
+    public int getGold() {
+        return gold;
+    }
+
+    public boolean isZero(){
+        if(gold == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /**
      * Buys an item from a shop.
      *
@@ -82,10 +95,12 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+        if ((costOfItem == 0 && !item.equals("sword"))|| gold < costOfItem || hasItemInKit(item)) {
             return false;
         }
-        gold -= costOfItem;
+        if(!hasItemInKit("sword")){
+            gold -= costOfItem;
+        }
         addItem(item);
         return true;
     }
