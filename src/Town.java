@@ -45,9 +45,11 @@ public class Town {
         return printMessage;
     }
 
-    public String getTreasure(){ searched = true; return treasure; }
+    public String getTreasure(){  return treasure; }
 
     public boolean getSearched() { return searched; }
+
+    public void setSearched() { searched = true;}
 
     /**
      * Assigns an object to the Hunter in town.
@@ -136,7 +138,7 @@ public class Town {
        else if(chance > .49 && hunter.hasItemInKit("shovel")){
            int goldReward = (int) (Math.random() * 20) + 1;
            hunter.changeGold(goldReward);
-          printMessage += "\nyou found " + goldReward + " gold";
+          printMessage += "\nYou found " + goldReward + " gold";
           alreadyDug = true;
        }
        else if(chance < .49 && hunter.hasItemInKit("shovel")){
@@ -144,7 +146,7 @@ public class Town {
           alreadyDug = true;
        }
        else {
-           printMessage += "\nyou cannot dig without a shovel";
+           printMessage += "\nYou cannot dig without a shovel";
        }
     }
 
