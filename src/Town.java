@@ -69,18 +69,19 @@ public class Town {
      *
      * @return true if the Hunter was able to leave town.
      */
-    public boolean leaveTown() {
+    public boolean leaveTown(boolean easy) {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
             printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
-            if (checkItemBreak()) {
-                hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, you lost yoit " + item  ;
+            if (!easy){
+                if (checkItemBreak()) {
+                    hunter.removeItemFromKit(item);
+                    printMessage += "\nUnfortunately, you lost your " + item  ;
+                }
             }
             return true;
         }
-
         printMessage = "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
         return false;
     }
@@ -99,11 +100,13 @@ public class Town {
      * The chances of finding a fight and winning the gold are based on the toughness of the town.<p>
      * The tougher the town, the easier it is to find a fight, and the harder it is to win one.
      */
-    public void lookForTrouble() {
+    public void lookForTrouble(boolean easy) {
         double noTroubleChance;
         if (toughTown) {
             noTroubleChance = 0.66;
-        } else {
+        } else if (easy) {
+            noTroubleChance = 0.1;
+        }else {
             noTroubleChance = 0.33;
         }
         if (Math.random() > noTroubleChance) {

@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean easyMode;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -25,6 +26,7 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
+        easyMode = false;
     }
 
     /**
@@ -56,9 +58,7 @@ public class TreasureHunter {
             hunter = new Hunter(name);
         }else if (mode.equals("e")){
             hunter = new Hunter(name, 40);
-            //brawls are easier
-            //selling item gets fll refund
-            //item can't break
+            easyMode = true;
         }
     }
 
@@ -74,6 +74,9 @@ public class TreasureHunter {
 
             // and the town is "tougher"
             toughness = 0.75;
+        } else if (easyMode){
+            markdown = 1.0;
+            toughness = 0.2;
         }
 
         // note that we don't need to access the Shop object
@@ -131,13 +134,13 @@ public class TreasureHunter {
         } else if (choice.equals("e")) {
             System.out.println(currentTown.getTerrain().infoString());
         } else if (choice.equals("m")) {
-            if (currentTown.leaveTown()) {
+            if (currentTown.leaveTown(easyMode)) {
                 // This town is going away so print its news ahead of time.
                 System.out.println(currentTown.getLatestNews());
                 enterTown();
             }
         } else if (choice.equals("l")) {
-            currentTown.lookForTrouble();
+            currentTown.lookForTrouble(easyMode);
         }
         else if(choice.equals("d")){
             currentTown.digGold();
