@@ -123,7 +123,7 @@ public class Town {
                 hunter.changeGold(goldDiff);
             }
             else if (hunter.hasItemInKit("sword")){
-                printMessage += "the brawler, seeing your sword, realizes he picked a losing fight and gives you his gold";
+                printMessage += "the brawler, seeing your sword, realizes they picked a losing fight and gives you their gold";
 
             }else {
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
