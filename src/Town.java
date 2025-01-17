@@ -138,20 +138,20 @@ public class Town {
        double chance = Math.random() ;
 
        if(alreadyDug){
-           printMessage += "\nYou already dug in this town";
+           printMessage = "\nYou already dug in this town";
        }
        else if(chance > .49 && hunter.hasItemInKit("shovel")){
            int goldReward = (int) (Math.random() * 20) + 1;
            hunter.changeGold(goldReward);
-          printMessage += "\nYou found " + goldReward + " gold";
+          printMessage = "\nYou found " + goldReward + " gold";
           alreadyDug = true;
        }
        else if(chance < .49 && hunter.hasItemInKit("shovel")){
-          printMessage +="\nYou dug but only found dirt";
+          printMessage ="\nYou dug but only found dirt";
           alreadyDug = true;
        }
        else {
-           printMessage += "\nYou cannot dig without a shovel";
+           printMessage = "\nYou cannot dig without a shovel";
        }
     }
 

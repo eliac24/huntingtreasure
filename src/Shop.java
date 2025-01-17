@@ -23,13 +23,15 @@ public class Shop {
     // instance variables
     private double markdown;
     private Hunter customer;
+    private boolean samuraiMode;
 
     /**
      * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
      *
      * @param markdown Percentage of markdown for selling items in decimal format.
      */
-    public Shop(double markdown) {
+    public Shop(double markdown, boolean samuraiMode) {
+        this.samuraiMode = samuraiMode;
         this.markdown = markdown;
         customer = null; // customer is set in the enter method
     }
@@ -92,7 +94,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold\n";
-        str += "Sword: " + SWORD_COST + " gold\n";
+        if(samuraiMode) {
+            str += "Sword: " + SWORD_COST + " gold\n";
+        }
         return str;
     }
 
