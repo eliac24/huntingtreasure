@@ -62,6 +62,7 @@ public class TreasureHunter {
             hardMode = true;
         }else if (mode.equals("test")) {
             hunter = new Hunter(name);
+            easyMode = true;
         }
         else if (mode.equals("e")){
             hunter = new Hunter(name, 40);
@@ -117,7 +118,7 @@ public class TreasureHunter {
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
             System.out.println(hunter.infoString() + "\n");
-            System.out.println(currentTown.infoString() + "\n");
+            System.out.println(Colors.WHITE + currentTown.infoString() + "\n" + Colors.RESET);
             System.out.println("(B)uy something at the shop.");
             System.out.println("(S)ell something at the shop.");
             System.out.println("(E)xplore surrounding terrain.");
@@ -150,18 +151,33 @@ public class TreasureHunter {
             }
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble(easyMode);
+            if (hunter.getGold() < 0){
+                lose();
+            }
         }
         else if(choice.equals("d")){
             currentTown.digGold();
         } else if (choice.equals("h")){
             String treasure = currentTown.getTreasure();
-            boolean searched = currentTown.getSearched();
             endGame = hunter.Search(treasure, currentTown);
+            if (endGame){
+                win();
+            }
         }else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         }
         else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
+    }
+
+    public void win(){
+        System.out.println(Colors.CYAN + "Congratulations, you have found the last of the three treasures, you win!" + Colors.RESET);
+        endGame = true;
+    }
+
+    public void lose(){
+        System.out.println(Colors.RED + "Looks like your journey has come to an end.\nBetter luck next time" + Colors.RESET);
+        endGame = true;
     }
 }

@@ -52,8 +52,7 @@ public class Hunter {
                     System.out.println("You already have this in your chest.");
                 }else{
                     if (addItemInChest(treasure)){
-                        if (chestIsEmpty()){
-                            System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                        if (hasItemInChest("trophy") && hasItemInChest("gem") && hasItemInChest("crown")){
                             return true;
                         }else{
                             System.out.println("It's added to your chest.");
@@ -73,9 +72,6 @@ public class Hunter {
      */
     public void changeGold(int modifier) {
         gold += modifier;
-        if (gold < 0) {
-            gold = 0;
-        }
     }
 
     public int getGold() {
@@ -102,7 +98,8 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if ((costOfItem == 0 && !item.equals("sword")) || gold < costOfItem || hasItemInKit(item)) {
+        if ((costOfItem == 0 && !item.equals("sword")) || (gold < costOfItem || hasItemInKit(item))) {
+
             return false;
         }
         if(!hasItemInKit("sword")){
