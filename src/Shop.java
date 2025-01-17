@@ -54,7 +54,7 @@ public class Shop {
                 System.out.println("We ain't got none of those.");
             }
             else {
-                System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
+                System.out.print("It'll cost you " + Colors.YELLOW + cost + Colors.RESET + " gold. Buy it (y/n)? ");
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
                     buyItem(item);
@@ -104,7 +104,7 @@ public class Shop {
     public void buyItem(String item) {
         int costOfItem = checkMarketPrice(item, true);
         if (customer.buyItem(item, costOfItem) && (customer.hasItemInKit("sword") )) {
-            System.out.println("the sword intimidates the shopkeeper and he gives you the item freely");
+            System.out.println("The sword intimidates the shopkeeper and he gives you the item freely");
         }
          else if (customer.buyItem(item, costOfItem) ) {
             System.out.println("Ye' got yerself a " + item + ". Come again soon.");
